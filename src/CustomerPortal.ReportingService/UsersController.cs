@@ -10,6 +10,7 @@ public class UsersController : ControllerBase
     private const string Filename = "UsersCountInfo.json";
 
     [HttpGet("user-count")]
+    [OutboundDataflow("reporting-service", "reports-user-count")]
     public async Task<IActionResult> GetUsers()
     {
         var usersText = await System.IO.File.ReadAllTextAsync(Filename);
