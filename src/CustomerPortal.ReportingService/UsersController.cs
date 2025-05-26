@@ -13,7 +13,10 @@ public class UsersController : ControllerBase
     [OutboundDataflow("reporting-service", "reports-user-count")]
     public async Task<IActionResult> GetUsers()
     {
-        var usersText = await System.IO.File.ReadAllTextAsync(Filename);
+        var usersText = await Pull(
+            "users-file-read",
+            () => System.IO.File.ReadAllTextAsync(Filename)
+        );
 
         var usersDataList = JsonSerializer.Deserialize<IEnumerable<UsersData>>(usersText);
 
