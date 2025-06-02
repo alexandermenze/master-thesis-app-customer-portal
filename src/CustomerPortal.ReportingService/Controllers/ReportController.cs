@@ -6,6 +6,7 @@ namespace CustomerPortal.ReportingService.Controllers;
 [Route("reports")]
 public class ReportController : ControllerBase
 {
+    [OutboundDataflow("reporting-service","user-statistics")]
     public async Task<IActionResult> GetUsersReport()
     {
         var userStatisticsCsv = await GetUserStatisticsFromFile();
@@ -15,7 +16,10 @@ public class ReportController : ControllerBase
 
     private async Task<IEnumerable<string>> GetUserStatisticsFromFile()
     {
-        var userStatisticLines = await System.IO.File.ReadAllLinesAsync(@"c:\user-stats.csv");
+        var userStatisticLines =
+            await Pull(
+                "user-statistics",
+                () => System.IO.File.ReadAllLinesAsync(@"c:\user-stats.csv"));
         return userStatisticLines;
     }
     
