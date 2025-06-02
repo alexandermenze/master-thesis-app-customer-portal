@@ -1,5 +1,3 @@
-using CustomerPortal.ReportingService.BackgroundServices;
-
 namespace CustomerPortal.ReportingService;
 
 public static class Program
@@ -10,8 +8,6 @@ public static class Program
 
         builder.Services.AddControllers();
         builder.Services.AddOpenApi();
-
-        builder.Services.AddHostedService<UsersReportBackgroundService>();
 
         var app = builder.Build();
 
