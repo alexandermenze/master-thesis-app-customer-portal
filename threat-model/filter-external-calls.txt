@@ -2,10 +2,12 @@ System,DateOnly,%
 System,DateTimeOffset,%
 System,TimeProvider,%
 System,TimeSpan,%
+System,DateTime,Parse
 System.Diagnostics,Stopwatch,%
 System,Math,%
 System,Random,%
 System,Guid,%
+System,Int32,Parse
 System.Text.Json,JsonSerializer,%
 System.Security.Claims,%,%
 System.Linq,%,%
