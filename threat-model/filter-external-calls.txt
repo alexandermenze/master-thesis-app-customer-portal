@@ -43,6 +43,7 @@ Microsoft.Extensions.AspNetCore.Builder.%,%,%
 Microsoft.Extensions.AspNetCore.Builder,%,%
 Microsoft.Extensions.Configuration,%,%
 Microsoft.Extensions.Configuration%,%,%
+Microsoft.Extensions.Hosting,HostEnvironmentEnvExtensions,IsDevelopment
 Microsoft.EntityFrameworkCore.Metadata.%,%,%
 Microsoft.EntityFrameworkCore,RelationalPropertyBuilderExtensions,%
 Microsoft.EntityFrameworkCore,ModelBuilder,ApplyConfigurationsFromAssembly
