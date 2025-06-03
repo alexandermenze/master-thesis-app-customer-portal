@@ -4,7 +4,7 @@ namespace CustomerPortal.ReportingService.BackgroundServices;
 
 public class UsersReportBackgroundService : BackgroundService
 {
-    [ThreatModelProcess("Background-service")]
+    [ThreatModelProcess("background-service")]
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         HttpClient httpClient = new HttpClient();
@@ -27,11 +27,11 @@ public class UsersReportBackgroundService : BackgroundService
         var timeStamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
 
         await Push(
-            "UserCount_TimeStamp",
+            "usercount_timestamp",
             () =>
                 File.AppendAllTextAsync(
                     Environment.CurrentDirectory + "/UsersReport.txt",
-                    $"rtimestamp: \"{timeStamp}\",\"userCount\":{userAmount}\n"
+                    $"timestamp: \"{timeStamp}\",\"userCount\":{userAmount}\n"
                 )
         );
     }

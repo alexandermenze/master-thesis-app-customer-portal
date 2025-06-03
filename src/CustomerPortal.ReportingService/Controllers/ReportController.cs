@@ -7,6 +7,7 @@ namespace CustomerPortal.ReportingService.Controllers;
 public class ReportController : ControllerBase
 {
     [HttpGet("userCount")]
+    [OutboundDataflow("reporting-service", "usercount_timestamp")]
     public Task<IActionResult> GetUsersReport()
     {
         var filePath = Environment.CurrentDirectory + "/UsersReport.txt";
@@ -16,7 +17,7 @@ public class ReportController : ControllerBase
             return Task.FromResult<IActionResult>(NotFound("Report file not found."));
         }
 
-        var reportContent = Pull("UserCount_TimeStamp", () => System.IO.File.ReadAllText(filePath));
+        var reportContent = Pull("usercount_timestamp", () => System.IO.File.ReadAllText(filePath));
         return Task.FromResult<IActionResult>(Ok(reportContent));
     }
 }
