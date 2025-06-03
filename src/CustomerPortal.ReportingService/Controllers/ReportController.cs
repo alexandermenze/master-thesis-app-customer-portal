@@ -11,12 +11,12 @@ public class ReportController : ControllerBase
     {
         var filePath = Environment.CurrentDirectory + "/UsersReport.txt";
 
-        if (!System.IO.File.Exists(filePath))
+        if (!Pull("UserCount_TimeStamp", () => System.IO.File.Exists(filePath)))
         {
             return Task.FromResult<IActionResult>(NotFound("Report file not found."));
         }
 
-        var reportContent = System.IO.File.ReadAllText(filePath);
+        var reportContent = Pull("UserCount_TimeStamp", () => System.IO.File.ReadAllText(filePath));
         return Task.FromResult<IActionResult>(Ok(reportContent));
     }
 }
