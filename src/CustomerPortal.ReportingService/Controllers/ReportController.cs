@@ -6,8 +6,17 @@ namespace CustomerPortal.ReportingService.Controllers;
 [Route("reports")]
 public class ReportController : ControllerBase
 {
+    [HttpGet("userCount")]
     public Task<IActionResult> GetUsersReport()
     {
-        throw new NotImplementedException();
+        var filePath = Environment.CurrentDirectory + "/UsersReport.txt";
+
+        if (!System.IO.File.Exists(filePath))
+        {
+            return Task.FromResult<IActionResult>(NotFound("Report file not found."));
+        }
+
+        var reportContent = System.IO.File.ReadAllText(filePath);
+        return Task.FromResult<IActionResult>(Ok(reportContent));
     }
 }
