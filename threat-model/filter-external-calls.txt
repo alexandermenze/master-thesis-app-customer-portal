@@ -60,3 +60,5 @@ StackExchange.Redis,IConnectionMultiplexer,GetDatabase
 Minio.DataModel.Args,%Args%,%
 Minio,MinioClientExtensions,%
 Minio,ServiceCollectionExtensions,AddMinio
+System,DateTime,ToString
+System.Threading.Tasks,Task,FromResult
