@@ -38,8 +38,10 @@ public class Login(IHttpClientFactory httpClientFactory) : PageModel
         if (response.IsSuccessStatusCode)
         {
             var (userId, token, expiresAt) =
-                await response.Content.ReadFromJsonAsync<TokenResponseDto>()
-                ?? throw new InvalidDataException("Server response is invalid.");
+                await Push(
+                    "login-customer",
+                    () => response.Content.ReadFromJsonAsync<TokenResponseDto>()
+                ) ?? throw new InvalidDataException("Server response is invalid.");
 
             var bearerToken = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{userId}:{token}"));
 
@@ -60,8 +62,10 @@ public class Login(IHttpClientFactory httpClientFactory) : PageModel
         }
         else
         {
-            var (stringValue, problemDetails) =
-                await response.Content.ReadFromJsonSafeAsync<ProblemDetails>();
+            var (stringValue, problemDetails) = await Push(
+                "login-customer",
+                () => response.Content.ReadFromJsonSafeAsync<ProblemDetails>()
+            );
             var errorMessage =
                 problemDetails?.Detail ?? stringValue ?? "Login war nicht erfolgreich.";
 

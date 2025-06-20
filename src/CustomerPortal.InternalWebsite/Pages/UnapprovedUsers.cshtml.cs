@@ -35,7 +35,7 @@ public class UnapprovedUsers(ILogger<UnapprovedUsers> logger, IHttpClientFactory
 
         if (response.IsSuccessStatusCode)
         {
-            var content = await response.Content.ReadAsStringAsync();
+            var content = await Pull("list-users", () => response.Content.ReadAsStringAsync());
             Users = JsonSerializer.Deserialize<ImmutableArray<UserResponseDto>>(
                 content,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true }

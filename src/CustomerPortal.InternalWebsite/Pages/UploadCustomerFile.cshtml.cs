@@ -43,7 +43,7 @@ public class UploadCustomerFile(
         var fileName = Path.GetFileName(Upload.FileName);
         var filePath = $"{CustomerNo}/{minioConfig.GenericFilesPath}/{fileName}";
 
-        await using var stream = Upload.OpenReadStream();
+        await using var stream = Pull("upload-file-for-customer", () => Upload.OpenReadStream());
 
         await Push(
             "store-customer-file",

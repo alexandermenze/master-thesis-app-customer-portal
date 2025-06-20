@@ -37,8 +37,10 @@ public class RegisterModel(IHttpClientFactory httpClientFactory) : PageModel
         }
         else
         {
-            var (stringValue, problemDetails) =
-                await response.Content.ReadFromJsonSafeAsync<ProblemDetails>();
+            var (stringValue, problemDetails) = await Push(
+                "register-customer",
+                () => response.Content.ReadFromJsonSafeAsync<ProblemDetails>()
+            );
             var errorMessage =
                 problemDetails?.Detail ?? stringValue ?? "Es ist ein Fehler aufgetreten.";
 
